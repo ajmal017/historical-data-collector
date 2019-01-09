@@ -79,7 +79,7 @@ public class SymbolFileHistoricalEquity {
     //        cnx500.get(i).setDisplayname(cnx500.get(i).getExchangeSymbol().replaceAll(" ", ""));
         }
 
-        Utilities.printSymbolsToFile(out, symbolFileName, true);
+        Utilities.printSymbolsToFile(out, symbolFileName, false);
     }
 
     public void loadAllSymbols() {
@@ -132,7 +132,7 @@ public class SymbolFileHistoricalEquity {
             }
 
             //Capture Strike levels
-            String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0);;
+            String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0,Algorithm.timeZone);;
             shortlistedkey = Utilities.getShorlistedKey(jPool, "strikedistance", expiry);
             Map<String, String> strikeLevels = new HashMap<>();
             try (Jedis jedis = jPool.pool.getResource()) {
@@ -240,7 +240,7 @@ public class SymbolFileHistoricalEquity {
             }
 
             //Capture Strike levels
-            String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0);;
+            String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0,Algorithm.timeZone);;
             shortlistedkey = Utilities.getShorlistedKey(jPool, "strikedistance", expiry);
             Map<String, String> strikeLevels = new HashMap<>();
             try (Jedis jedis = jPool.pool.getResource()) {

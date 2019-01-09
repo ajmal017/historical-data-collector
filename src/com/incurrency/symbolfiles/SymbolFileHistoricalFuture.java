@@ -56,7 +56,7 @@ public class SymbolFileHistoricalFuture {
 
     public void historicalFuture() {
         ArrayList<BeanSymbol> out = new ArrayList<>();
-        String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0);
+        String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0,Algorithm.timeZone);
         BeanSymbol s = new BeanSymbol("NIFTY50", "NSENIFTY", "FUT", expiry, "", "");
         s.setCurrency("INR");
         s.setExchange("NSE");
@@ -67,8 +67,8 @@ public class SymbolFileHistoricalFuture {
         ArrayList<BeanSymbol> fno = loadFutures(expiry);
         out.addAll(fno);
         Date dtExpiry = DateUtil.parseDate("yyyyMMdd", expiry, MainAlgorithm.timeZone);
-        String expiryplus = DateUtil.getFormatedDate("yyyyMMdd", DateUtil.addDays(dtExpiry, 1).getTime(), TimeZone.getTimeZone(Algorithm.timeZone));
-        String nextExpiry = Utilities.getLastThursday(expiryplus, "yyyyMMdd", 0);
+//        String expiryplus = DateUtil.getFormatedDate("yyyyMMdd", DateUtil.addDays(dtExpiry, 1).getTime(), TimeZone.getTimeZone(Algorithm.timeZone));
+        String nextExpiry = Utilities.getLastThursday(expiry, "yyyyMMdd", 1,Algorithm.timeZone);
         s = new BeanSymbol("NIFTY50", "NSENIFTY", "FUT", nextExpiry, "", "");
         s.setCurrency("INR");
         s.setExchange("NSE");
@@ -83,7 +83,7 @@ public class SymbolFileHistoricalFuture {
             //out.get(i).setDisplayname(out.get(i).getExchangeSymbol().replaceAll(" ", ""));
         }
 
-        Utilities.printSymbolsToFile(out, symbolFileName, true);
+        Utilities.printSymbolsToFile(out, symbolFileName, false);
     }
 
     public void loadAllSymbols() {
@@ -136,7 +136,7 @@ public class SymbolFileHistoricalFuture {
             }
 
             //Capture Strike levels
-            String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0);;
+            String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0,Algorithm.timeZone);;
             shortlistedkey = Utilities.getShorlistedKey(jPool, "strikedistance", expiry);
             Map<String, String> strikeLevels = new HashMap<>();
             try (Jedis jedis = jPool.pool.getResource()) {
@@ -244,7 +244,7 @@ public class SymbolFileHistoricalFuture {
             }
 
             //Capture Strike levels
-            String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0);;
+            String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0,Algorithm.timeZone);;
             shortlistedkey = Utilities.getShorlistedKey(jPool, "strikedistance", expiry);
             Map<String, String> strikeLevels = new HashMap<>();
             try (Jedis jedis = jPool.pool.getResource()) {

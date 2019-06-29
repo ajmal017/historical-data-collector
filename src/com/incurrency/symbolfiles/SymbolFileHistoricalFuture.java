@@ -57,6 +57,9 @@ public class SymbolFileHistoricalFuture {
     public void historicalFuture() {
         ArrayList<BeanSymbol> out = new ArrayList<>();
         String expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 0,Algorithm.timeZone);
+        if(expiry.compareTo(currentDay)<0){
+            expiry = Utilities.getLastThursday(currentDay, "yyyyMMdd", 1,Algorithm.timeZone);
+        }
         BeanSymbol s = new BeanSymbol("NIFTY50", "NSENIFTY", "FUT", expiry, "", "");
         s.setCurrency("INR");
         s.setExchange("NSE");

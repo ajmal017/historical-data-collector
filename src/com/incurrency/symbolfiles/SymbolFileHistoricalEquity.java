@@ -64,6 +64,23 @@ public class SymbolFileHistoricalEquity {
   //      s.setDisplayname("NSENIFTY_IND___");
         out.add(s.clone(s));
 
+        s = new BeanSymbol("TRIN-NSE", "TRIN-NSE", "IND", "", "", "");
+        s.setCurrency("INR");
+        s.setExchange("NSE");
+        s.setStreamingpriority(1);
+        s.setStrategy("DATA");
+  //      s.setDisplayname("NSENIFTY_IND___");
+        out.add(s.clone(s));
+        
+        s = new BeanSymbol("TICK-NSE", "TICK-NSE", "IND", "", "", "");
+        s.setCurrency("INR");
+        s.setExchange("NSE");
+        s.setStreamingpriority(1);
+        s.setStrategy("DATA");
+  //      s.setDisplayname("NSENIFTY_IND___");
+        out.add(s.clone(s));
+        
+        
         s = new BeanSymbol("BANKNIFTY", "BANKNIFTY", "IND", "", "", "");
         s.setCurrency("INR");
         s.setExchange("NSE");
